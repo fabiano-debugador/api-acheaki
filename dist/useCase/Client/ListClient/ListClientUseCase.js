@@ -9,30 +9,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostgresClientRepository = void 0;
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
-class PostgresClientRepository {
-    findByLogin(login) {
+exports.ListClientUseCase = void 0;
+class ListClientUseCase {
+    constructor(clientsRepository) {
+        this.clientsRepository = clientsRepository;
+    }
+    execute(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const client = yield prisma.client.findUnique({
-                where: {
-                    login: String(login),
-                },
-            });
-            return client;
+            const clientSearch = yield this.clientsRepository.findByLogin(data.login);
+            if (!clientSearch) {
+                return null;
+            }
+            return clientSearch;
         });
     }
-    save(client) {
+    executeAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield prisma.client.create({ data: client });
-        });
-    }
-    findAll() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const clients = yield prisma.client.findMany();
+            const clients = this.clientsRepository.findAll();
+            if (!clients) {
+                throw new Error('Clients not found');
+            }
             return clients;
         });
     }
 }
-exports.PostgresClientRepository = PostgresClientRepository;
+exports.ListClientUseCase = ListClientUseCase;
