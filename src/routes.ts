@@ -1,5 +1,6 @@
-import { request, Router } from "express";
+import { Router } from "express";
 import { createClientController } from "./useCase/Client/CreateClient";
+import { deleteClientController } from "./useCase/Client/DeleteClient";
 import { listClientController } from "./useCase/Client/ListClient";
 import { updateClientController } from "./useCase/Client/UpdateClient";
 const route = Router();
@@ -18,6 +19,10 @@ route.get('/clients/:login', (req, resp) => {
 
 route.put('/clients/:id', (req, resp) => {
   return updateClientController.update(req, resp)
+})
+
+route.delete('/clients/:id', (req, resp) => {
+  return deleteClientController.handle(req, resp)
 })
 
 export { route }

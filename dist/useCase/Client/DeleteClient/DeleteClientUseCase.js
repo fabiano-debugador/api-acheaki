@@ -9,22 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateClientUseCase = void 0;
-const Client_1 = require("../../../entities/Client");
-class UpdateClientUseCase {
-    constructor(clientRepository) {
-        this.clientRepository = clientRepository;
+exports.DeleteClientUseCase = void 0;
+class DeleteClientUseCase {
+    constructor(clientsRepository) {
+        this.clientsRepository = clientsRepository;
     }
     execute(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = data;
-            // const clientAlredyExists = await this.clientRepository.findByLogin(data.login);
-            // if (clientAlredyExists) {
-            //   throw new Error('Login already exists.');
-            // }
-            const client = new Client_1.Client(data);
-            yield this.clientRepository.update(data);
+            const client = yield this.clientsRepository.findById(data.id);
+            if (client) {
+                yield this.clientsRepository.delete(data.id);
+                return true;
+            }
         });
     }
 }
-exports.UpdateClientUseCase = UpdateClientUseCase;
+exports.DeleteClientUseCase = DeleteClientUseCase;

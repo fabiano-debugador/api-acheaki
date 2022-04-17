@@ -16,4 +16,5 @@ export interface IUpdateClientRepository extends IClientsRepository {
 
 export interface IDeleteClientRepository extends IClientsRepository {
   delete(id: string): Promise<void>
+  findById(id: string): Promise<Client | Client[] | null>;
 }

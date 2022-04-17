@@ -23,6 +23,16 @@ class PostgresClientRepository {
             return client;
         });
     }
+    findById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const client = yield prisma.client.findUnique({
+                where: {
+                    id: id
+                }
+            });
+            return client;
+        });
+    }
     save(client) {
         return __awaiter(this, void 0, void 0, function* () {
             yield prisma.client.create({ data: client });
@@ -39,11 +49,20 @@ class PostgresClientRepository {
             const { id, login, password } = data;
             yield prisma.client.update({
                 where: {
-                    id,
+                    id: id,
                 },
                 data: {
-                    login,
-                    password
+                    login: login,
+                    password: password
+                }
+            });
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield prisma.client.delete({
+                where: {
+                    id: id
                 }
             });
         });
