@@ -24,4 +24,17 @@ export class PostgresClientRepository implements IAllClients {
 
     return clients
   }
+
+  async update(data: Client): Promise<void> {
+    const { id, login, password } = data;
+    await prisma.client.update({
+      where: {
+        id: id,
+      },
+      data: {
+        login: login,
+        password: password
+      }
+    })
+  }
 }
