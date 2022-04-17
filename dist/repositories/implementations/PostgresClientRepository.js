@@ -34,5 +34,19 @@ class PostgresClientRepository {
             return clients;
         });
     }
+    update(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id, login, password } = data;
+            yield prisma.client.update({
+                where: {
+                    id,
+                },
+                data: {
+                    login,
+                    password
+                }
+            });
+        });
+    }
 }
 exports.PostgresClientRepository = PostgresClientRepository;

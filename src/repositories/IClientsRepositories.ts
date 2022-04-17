@@ -9,3 +9,11 @@ export interface IAllClients extends IClientsRepository {
   [x: string]: any;
   findAll(): Promise<Client[] | null>;
 }
+
+export interface IUpdateClientRepository extends IClientsRepository {
+  update(client: Client): Promise<void>;
+}
+
+export interface IDeleteClientRepository extends IClientsRepository {
+  delete(id: string): Promise<void>
+}

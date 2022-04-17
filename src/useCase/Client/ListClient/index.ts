@@ -12,4 +12,4 @@ const listClientController = new ListClientController(
   listCLientUseCase
 )
 
-export  { listCLientUseCase, listClientController }
+export { listCLientUseCase, listClientController }
