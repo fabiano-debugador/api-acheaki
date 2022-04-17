@@ -15,6 +15,16 @@ export class PostgresClientRepository implements IAllClients {
     return client;
   }
 
+  async findById(id: string): Promise<Client | null> {
+    const client = await prisma.client.findUnique({
+      where: {
+        id: id
+      }
+    })
+
+    return client;
+  }
+
   async save(client: Client): Promise<void> {
     await prisma.client.create({ data: client });
   }
@@ -34,6 +44,14 @@ export class PostgresClientRepository implements IAllClients {
       data: {
         login: login,
         password: password
+      }
+    })
+  }
+
+  async delete(id: string): Promise<void> {
+    await prisma.client.delete({
+      where: {
+        id: id
       }
     })
   }

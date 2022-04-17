@@ -9,22 +9,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateClientUseCase = void 0;
-const Client_1 = require("../../../entities/Client");
-class UpdateClientUseCase {
-    constructor(clientRepository) {
-        this.clientRepository = clientRepository;
+exports.DeleteClientController = void 0;
+class DeleteClientController {
+    constructor(deleteClientUseCase) {
+        this.deleteClientUseCase = deleteClientUseCase;
     }
-    execute(data) {
+    handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = data;
-            // const clientAlredyExists = await this.clientRepository.findByLogin(data.login);
-            // if (clientAlredyExists) {
-            //   throw new Error('Login already exists.');
-            // }
-            const client = new Client_1.Client(data);
-            yield this.clientRepository.update(data);
+            const { id } = request.params;
+            try {
+                const isDeleted = yield this.deleteClientUseCase.execute({ id });
+                if (isDeleted) {
+                    return response.status(204).send();
+                }
+                return response.status(404).json({ message: 'Client not found' });
+            }
+            catch (error) {
+                return response.status(400).json({
+                    message: error || 'Unexpected error'
+                });
+            }
         });
     }
 }
-exports.UpdateClientUseCase = UpdateClientUseCase;
+exports.DeleteClientController = DeleteClientController;
