@@ -8,7 +8,24 @@ datasource db {
 }
 
 model Client {
-  id       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  login    String? @unique
+  id       String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  login    String?  @unique
   password String?
+  Profile  Profile?
+}
+
+model Profile {
+  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  idLogin      String  @unique @db.Uuid
+  name         String
+  slogan       String?
+  description  String
+  tituloSlug   String
+  imageProfile String
+  banner       String
+  tag          String
+  follower     Int
+  point        Decimal
+  vote         Int
+  Client       Client  @relation(fields: [idLogin], references: [id])
 }
