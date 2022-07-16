@@ -17,6 +17,32 @@ export class PostgresProductCategoryRepository
     return categoryProduct;
   }
 
+  async findById(id: string): Promise<ProductCategory | null> {
+    const category = await prisma.categoryProduct.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return category;
+  }
+
+  async update(data: ProductCategory): Promise<void> {
+    const { id, idLogin, category, categorySlug, image } = data;
+
+    await prisma.categoryProduct.update({
+      where: {
+        id,
+      },
+      data: {
+        idLogin,
+        category,
+        categorySlug,
+        image,
+      },
+    });
+  }
+
   async save(category: ProductCategory): Promise<void> {
     await prisma.categoryProduct.create({ data: category });
   }

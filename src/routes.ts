@@ -7,6 +7,7 @@ import { updateClientController } from "./useCase/Client/UpdateClient";
 import { createProfileController } from "./useCase/Profile/CreateProfile";
 
 import { createProductCategoryController } from "./useCase/ProductCategory/CreateProductCategory";
+import { updateProductCategoryController } from "./useCase/ProductCategory/UpdateProductCategory";
 const route = Router();
 
 route.post("/clients", (req, resp) => {
@@ -35,6 +36,10 @@ route.post("/profiles", (req, res) => {
 
 route.post("/product/category", (req, res) => {
   return createProductCategoryController.handle(req, res);
+});
+
+route.put("/product/category/:id", (req, res) => {
+  return updateProductCategoryController.handle(req, res);
 });
 
 export { route };

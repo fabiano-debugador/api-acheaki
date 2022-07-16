@@ -3,12 +3,11 @@ import { IProductCategoryRepository } from "../../../repositories/IProductCatego
 import { ICreateProductCategoryRequestDTO } from "./CreateProductCategoryDTO";
 
 export class CreateProductCategoryUseCase {
-  constructor(private productCategory: IProductCategoryRepository) {}
+  constructor(private productCategoryRepository: IProductCategoryRepository) {}
 
   async execute(data: ICreateProductCategoryRequestDTO) {
-    const categoryAlreadyExists = await this.productCategory.findByCategory(
-      data.category
-    );
+    const categoryAlreadyExists =
+      await this.productCategoryRepository.findByCategory(data.category);
 
     if (categoryAlreadyExists) {
       throw new Error("Category alredy exists.");
@@ -16,6 +15,6 @@ export class CreateProductCategoryUseCase {
 
     const category = new ProductCategory(data);
 
-    await this.productCategory.save(category);
+    await this.productCategoryRepository.save(category);
   }
 }
