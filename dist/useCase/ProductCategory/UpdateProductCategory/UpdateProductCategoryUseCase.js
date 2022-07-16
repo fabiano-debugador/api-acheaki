@@ -9,21 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateProductCategoryUseCase = void 0;
-const ProductCategory_1 = require("../../../entities/ProductCategory");
-class CreateProductCategoryUseCase {
+exports.UpdateProductCategoryUseCase = void 0;
+class UpdateProductCategoryUseCase {
     constructor(productCategoryRepository) {
         this.productCategoryRepository = productCategoryRepository;
     }
     execute(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const categoryAlreadyExists = yield this.productCategoryRepository.findByCategory(data.category);
-            if (categoryAlreadyExists) {
-                throw new Error("Category alredy exists.");
+            const categoryExists = yield this.productCategoryRepository.findByCategory(data.category);
+            if (categoryExists) {
+                throw new Error("Category already exists");
             }
-            const category = new ProductCategory_1.ProductCategory(data);
-            yield this.productCategoryRepository.save(category);
+            yield this.productCategoryRepository.update(data);
         });
     }
 }
-exports.CreateProductCategoryUseCase = CreateProductCategoryUseCase;
+exports.UpdateProductCategoryUseCase = UpdateProductCategoryUseCase;

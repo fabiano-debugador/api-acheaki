@@ -8,6 +8,7 @@ const ListClient_1 = require("./useCase/Client/ListClient");
 const UpdateClient_1 = require("./useCase/Client/UpdateClient");
 const CreateProfile_1 = require("./useCase/Profile/CreateProfile");
 const CreateProductCategory_1 = require("./useCase/ProductCategory/CreateProductCategory");
+const UpdateProductCategory_1 = require("./useCase/ProductCategory/UpdateProductCategory");
 const route = (0, express_1.Router)();
 exports.route = route;
 route.post("/clients", (req, resp) => {
@@ -30,4 +31,7 @@ route.post("/profiles", (req, res) => {
 });
 route.post("/product/category", (req, res) => {
     return CreateProductCategory_1.createProductCategoryController.handle(req, res);
+});
+route.put("/product/category/:id", (req, res) => {
+    return UpdateProductCategory_1.updateProductCategoryController.handle(req, res);
 });

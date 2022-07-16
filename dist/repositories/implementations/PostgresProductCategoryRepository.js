@@ -23,9 +23,35 @@ class PostgresProductCategoryRepository {
             return categoryProduct;
         });
     }
+    findById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const category = yield prisma.categoryProduct.findUnique({
+                where: {
+                    id,
+                },
+            });
+            return category;
+        });
+    }
+    update(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id, idLogin, category, categorySlug, image } = data;
+            yield prisma.categoryProduct.update({
+                where: {
+                    id,
+                },
+                data: {
+                    idLogin,
+                    category,
+                    categorySlug,
+                    image,
+                },
+            });
+        });
+    }
     save(category) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield prisma.client.create({ data: category });
+            yield prisma.categoryProduct.create({ data: category });
         });
     }
 }
