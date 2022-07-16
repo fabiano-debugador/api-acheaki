@@ -8,7 +8,106 @@ datasource db {
 }
 
 model Client {
-  id       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  login    String? @unique
-  password String?
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  login           String?           @unique
+  password        String?
+  Profile         Profile?
+  album           Album[]
+  article         Article[]
+  categoryAlbum   CategoryAlbum[]
+  categoryProduct CategoryProduct[]
+  contact         Contact?
+}
+
+model Profile {
+  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  idLogin      String  @unique @db.Uuid
+  name         String
+  slogan       String?
+  description  String
+  titleSlug    String
+  imageProfile String
+  banner       String
+  tag          String
+  follower     Int
+  point        Decimal
+  vote         Int
+  login        Client  @relation(fields: [idLogin], references: [id])
+}
+
+model Management {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  login    String
+  password String
+}
+
+model Album {
+  id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  idLogin     String @db.Uuid
+  idCatAlbum  String @db.Uuid
+  name        String
+  page        String
+  description String
+  tag         String
+  nameSlug    String
+  likes       Int
+  album       Client @relation(fields: [idLogin], references: [id])
+}
+
+model Article {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  idLogin     String   @db.Uuid
+  name        String
+  articleSlug String
+  description String
+  tag         String
+  date        DateTime
+  page        String
+  likes       Int
+  point       String
+  vote        Int
+  article     Client   @relation(fields: [idLogin], references: [id])
+}
+
+model CategoryAlbum {
+  id                String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  idLogin           String @db.Uuid
+  name              String
+  categoryAlbumSlug String
+  image             String
+  categoryAlbum     Client @relation(fields: [idLogin], references: [id])
+}
+
+model Category {
+  id           String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  categorySlug String
+  session      String
+}
+
+model CategoryProduct {
+  id              String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  idLogin         String @db.Uuid
+  category        String
+  categorySlug    String
+  image           String
+  categoryProduct Client @relation(fields: [idLogin], references: [id])
+}
+
+model Contact {
+  id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  idLogin   String @unique @db.Uuid
+  phone     String
+  cell      String
+  website   String
+  email     String
+  skype     String
+  facebook  String
+  twitter   String
+  youtube   String
+  instagram String
+  pinterest String
+  linkedin  String
+  page      String
+  contact   Client @relation(fields: [idLogin], references: [id])
 }
