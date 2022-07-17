@@ -21,9 +21,9 @@ export class UpdateProductCategoryController {
         image,
       });
       return response.status(204).send();
-    } catch (error) {
+    } catch (error: any) {
       return response.status(400).json({
-        message: error || "Unexpected error",
+        message: error.message || "Unexpected error",
       });
     }
   }

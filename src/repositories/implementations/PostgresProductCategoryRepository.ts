@@ -17,6 +17,25 @@ export class PostgresProductCategoryRepository
     return categoryProduct;
   }
 
+  async validateCategoryAndProfile(
+    id: string,
+    idLogin: string
+  ): Promise<boolean> {
+    const category = await prisma.categoryProduct.findMany({
+      where: {
+        idLogin,
+        id: {
+          equals: id,
+        },
+      },
+    });
+
+    if (category.length === 0) {
+      return false;
+    }
+    return true;
+  }
+
   async findById(id: string): Promise<ProductCategory | null> {
     const category = await prisma.categoryProduct.findUnique({
       where: {
