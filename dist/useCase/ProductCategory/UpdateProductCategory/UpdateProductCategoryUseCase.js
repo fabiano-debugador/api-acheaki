@@ -16,7 +16,11 @@ class UpdateProductCategoryUseCase {
     }
     execute(data) {
         return __awaiter(this, void 0, void 0, function* () {
+            const verifiedCategory = yield this.productCategoryRepository.validateCategoryAndProfile(data.id, data.idLogin);
             const categoryExists = yield this.productCategoryRepository.findByCategory(data.category);
+            if (!verifiedCategory) {
+                throw new Error("Category not found in this account");
+            }
             if (categoryExists) {
                 throw new Error("Category already exists");
             }

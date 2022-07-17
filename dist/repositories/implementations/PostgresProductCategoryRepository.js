@@ -23,6 +23,22 @@ class PostgresProductCategoryRepository {
             return categoryProduct;
         });
     }
+    validateCategoryAndProfile(id, idLogin) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const category = yield prisma.categoryProduct.findMany({
+                where: {
+                    idLogin,
+                    id: {
+                        equals: id,
+                    },
+                },
+            });
+            if (category.length === 0) {
+                return false;
+            }
+            return true;
+        });
+    }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const category = yield prisma.categoryProduct.findUnique({

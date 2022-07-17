@@ -30,7 +30,7 @@ class UpdateProductCategoryController {
             }
             catch (error) {
                 return response.status(400).json({
-                    message: error || "Unexpected error",
+                    message: error.message || "Unexpected error",
                 });
             }
         });
