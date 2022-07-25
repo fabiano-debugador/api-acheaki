@@ -65,4 +65,12 @@ export class PostgresProductCategoryRepository
   async save(category: ProductCategory): Promise<void> {
     await prisma.categoryProduct.create({ data: category });
   }
+
+  async delete(id: string): Promise<void> {
+    await prisma.categoryProduct.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

@@ -8,6 +8,7 @@ import { createProfileController } from "./useCase/Profile/CreateProfile";
 
 import { createProductCategoryController } from "./useCase/ProductCategory/CreateProductCategory";
 import { updateProductCategoryController } from "./useCase/ProductCategory/UpdateProductCategory";
+import { deleteProductCategoryController } from "./useCase/ProductCategory/DeleteProductCategory";
 const route = Router();
 
 route.post("/clients", (req, resp) => {
@@ -40,6 +41,10 @@ route.post("/product/category", (req, res) => {
 
 route.put("/product/category/:id", (req, res) => {
   return updateProductCategoryController.handle(req, res);
+});
+
+route.delete("/product/category/:id", (req, res) => {
+  return deleteProductCategoryController.handle(req, res);
 });
 
 export { route };

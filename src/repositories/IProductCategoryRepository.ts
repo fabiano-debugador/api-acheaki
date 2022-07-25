@@ -7,4 +7,5 @@ export interface IProductCategoryRepository {
 
   save(productCategory: ProductCategory): Promise<void>;
   update(category: ProductCategory): Promise<void>;
+  delete(id: string): Promise<void>;
 }
