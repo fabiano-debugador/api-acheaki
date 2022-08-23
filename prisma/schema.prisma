@@ -17,6 +17,7 @@ model Client {
   categoryAlbum   CategoryAlbum[]
   categoryProduct CategoryProduct[]
   contact         Contact?
+  product         Product[]
 }
 
 model Profile {
@@ -110,4 +111,22 @@ model Contact {
   linkedin  String
   page      String
   contact   Client @relation(fields: [idLogin], references: [id])
+}
+
+model Product {
+  id          String @id @default(uuid())
+  idLogin     String @db.Uuid
+  idCategory  String @db.Uuid
+  name        String
+  slug        String
+  price       Int
+  description String
+  image       String
+  page        String
+  tag         String
+  vote        Int
+  like        Int
+  point       Int
+  product     Client @relation(fields: [idLogin], references: [id])
+  @@map("product")
 }
