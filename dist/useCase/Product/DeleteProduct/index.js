@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.deleteProductController = exports.deleteProductUseCase = void 0;
+const PostgresProductRepository_1 = require("../../../repositories/implementations/PostgresProductRepository");
+const DeleteProductController_1 = require("./DeleteProductController");
+const DeleteProductUseCase_1 = require("./DeleteProductUseCase");
+const postgresProductRepository = new PostgresProductRepository_1.PostgresProductRepository();
+const deleteProductUseCase = new DeleteProductUseCase_1.DeleteProductUseCase(postgresProductRepository);
+exports.deleteProductUseCase = deleteProductUseCase;
+const deleteProductController = new DeleteProductController_1.DeleteProductController(deleteProductUseCase);
+exports.deleteProductController = deleteProductController;

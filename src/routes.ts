@@ -13,6 +13,7 @@ import { listProductCategoryController } from "./useCase/ProductCategory/ListPro
 
 import { createProductController } from "./useCase/Product/CreateProduct";
 import { updateProductController } from "./useCase/Product/UpdateProduct";
+import { deleteProductController } from "./useCase/Product/DeleteProduct";
 
 const route = Router();
 
@@ -67,6 +68,10 @@ route.post("/product", (req, res) => {
 
 route.put("/product/:id", (req, res) => {
   return updateProductController.handle(req, res);
+});
+
+route.delete("/product/:id", (req, res) => {
+  return deleteProductController.handle(req, res);
 });
 
 export { route };

@@ -1,4 +1,4 @@
-import { Client } from '../entities/Client';
+import { Client } from "../entities/Client";
 
 export interface IClientsRepository {
   findByLogin(login: string): Promise<Client | Client[] | null>;
@@ -15,6 +15,6 @@ export interface IUpdateClientRepository extends IClientsRepository {
 }
 
 export interface IDeleteClientRepository extends IClientsRepository {
-  delete(id: string): Promise<void>
+  delete(id: string): Promise<void>;
   findById(id: string): Promise<Client | Client[] | null>;
 }

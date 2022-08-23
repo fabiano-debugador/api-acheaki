@@ -13,6 +13,7 @@ const DeleteProductCategory_1 = require("./useCase/ProductCategory/DeleteProduct
 const ListProductCategory_1 = require("./useCase/ProductCategory/ListProductCategory");
 const CreateProduct_1 = require("./useCase/Product/CreateProduct");
 const UpdateProduct_1 = require("./useCase/Product/UpdateProduct");
+const DeleteProduct_1 = require("./useCase/Product/DeleteProduct");
 const route = (0, express_1.Router)();
 exports.route = route;
 route.post("/clients", (req, resp) => {
@@ -54,4 +55,7 @@ route.post("/product", (req, res) => {
 });
 route.put("/product/:id", (req, res) => {
     return UpdateProduct_1.updateProductController.handle(req, res);
+});
+route.delete("/product/:id", (req, res) => {
+    return DeleteProduct_1.deleteProductController.handle(req, res);
 });

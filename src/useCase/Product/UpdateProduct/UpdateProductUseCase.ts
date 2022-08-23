@@ -1,8 +1,8 @@
-import { IProductRepository } from "../../../repositories/IProductRepositories";
+import { IUpdateProductRepository } from "../../../repositories/IProductRepositories";
 import { IUpdateProductDTO } from "./UpdateProductDTO";
 
 export class UpdateProductUseCase {
-  constructor(private updateProductRepository: IProductRepository) {}
+  constructor(private updateProductRepository: IUpdateProductRepository) {}
 
   async execute(product: IUpdateProductDTO) {
     const existsProduct = await this.updateProductRepository.findById(

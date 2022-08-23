@@ -37,4 +37,12 @@ export class PostgresProductRepository implements IProductRepository {
       data: product,
     });
   }
+
+  async delete(id: string): Promise<void> {
+    await prisma.product.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

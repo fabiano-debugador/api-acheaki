@@ -48,5 +48,14 @@ class PostgresProductRepository {
             });
         });
     }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield prisma.product.delete({
+                where: {
+                    id,
+                },
+            });
+        });
+    }
 }
 exports.PostgresProductRepository = PostgresProductRepository;
