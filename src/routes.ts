@@ -9,6 +9,8 @@ import { createProfileController } from "./useCase/Profile/CreateProfile";
 import { createProductCategoryController } from "./useCase/ProductCategory/CreateProductCategory";
 import { updateProductCategoryController } from "./useCase/ProductCategory/UpdateProductCategory";
 import { deleteProductCategoryController } from "./useCase/ProductCategory/DeleteProductCategory";
+import { listProductCategoryController } from "./useCase/ProductCategory/ListProductCategory";
+
 const route = Router();
 
 route.post("/clients", (req, resp) => {
@@ -45,6 +47,14 @@ route.put("/product/category/:id", (req, res) => {
 
 route.delete("/product/category/:id", (req, res) => {
   return deleteProductCategoryController.handle(req, res);
+});
+
+route.get("/product/category", (req, res) => {
+  return listProductCategoryController.listAll(req, res);
+});
+
+route.get("/product/category/:id", (req, res) => {
+  return listProductCategoryController.getOne(req, res);
 });
 
 export { route };

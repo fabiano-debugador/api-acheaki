@@ -36,6 +36,33 @@ export class PostgresProductCategoryRepository
     return true;
   }
 
+  async findAllCategory(idLogin: string): Promise<ProductCategory[]> {
+    const categories = await prisma.categoryProduct.findMany({
+      where: {
+        idLogin,
+      },
+    });
+    return categories;
+  }
+
+  async findByIdLogin(idLogin: string): Promise<ProductCategory | null> {
+    const category = await prisma.categoryProduct.findFirst({
+      where: {
+        idLogin,
+      },
+    });
+    return category;
+  }
+
+  async findCategory(id: string): Promise<ProductCategory | null> {
+    const category = await prisma.categoryProduct.findFirst({
+      where: {
+        id,
+      },
+    });
+    return category;
+  }
+
   async findById(id: string): Promise<ProductCategory | null> {
     const category = await prisma.categoryProduct.findUnique({
       where: {
