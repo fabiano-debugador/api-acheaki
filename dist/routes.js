@@ -14,6 +14,7 @@ const ListProductCategory_1 = require("./useCase/ProductCategory/ListProductCate
 const CreateProduct_1 = require("./useCase/Product/CreateProduct");
 const UpdateProduct_1 = require("./useCase/Product/UpdateProduct");
 const DeleteProduct_1 = require("./useCase/Product/DeleteProduct");
+const ListProduct_1 = require("./useCase/Product/ListProduct");
 const route = (0, express_1.Router)();
 exports.route = route;
 route.post("/clients", (req, resp) => {
@@ -58,4 +59,10 @@ route.put("/product/:id", (req, res) => {
 });
 route.delete("/product/:id", (req, res) => {
     return DeleteProduct_1.deleteProductController.handle(req, res);
+});
+route.get("/product", (req, res) => {
+    return ListProduct_1.listProductController.listAll(req, res);
+});
+route.get("/product/:id", (req, res) => {
+    return ListProduct_1.listProductController.getOne(req, res);
 });

@@ -3,6 +3,7 @@ import { Product } from "../entities/Product";
 export interface IProductRepository {
   findByName(name: string): Promise<Product | null>;
   findById(id: string): Promise<Product | null>;
+  listAll(idLogin: string): Promise<Product[]>;
 }
 
 export interface ICreateProductRepository extends IProductRepository {

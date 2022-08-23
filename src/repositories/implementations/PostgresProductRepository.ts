@@ -15,6 +15,16 @@ export class PostgresProductRepository implements IProductRepository {
     return product;
   }
 
+  async listAll(idLogin: string): Promise<Product[]> {
+    const product = await prisma.product.findMany({
+      where: {
+        idLogin,
+      },
+    });
+
+    return product;
+  }
+
   async save(product: Product): Promise<void> {
     await prisma.product.create({ data: product });
   }

@@ -23,6 +23,16 @@ class PostgresProductRepository {
             return product;
         });
     }
+    listAll(idLogin) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const product = yield prisma.product.findMany({
+                where: {
+                    idLogin,
+                },
+            });
+            return product;
+        });
+    }
     save(product) {
         return __awaiter(this, void 0, void 0, function* () {
             yield prisma.product.create({ data: product });
