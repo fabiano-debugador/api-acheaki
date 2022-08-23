@@ -12,6 +12,7 @@ import { deleteProductCategoryController } from "./useCase/ProductCategory/Delet
 import { listProductCategoryController } from "./useCase/ProductCategory/ListProductCategory";
 
 import { createProductController } from "./useCase/Product/CreateProduct";
+import { updateProductController } from "./useCase/Product/UpdateProduct";
 
 const route = Router();
 
@@ -62,6 +63,10 @@ route.get("/product/category/:id", (req, res) => {
 // Products
 route.post("/product", (req, res) => {
   return createProductController.handle(req, res);
+});
+
+route.put("/product/:id", (req, res) => {
+  return updateProductController.handle(req, res);
 });
 
 export { route };

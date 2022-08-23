@@ -9,24 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateProductCategoryController = void 0;
-class UpdateProductCategoryController {
-    constructor(updateProductCategoryUseCase) {
-        this.updateProductCategoryUseCase = updateProductCategoryUseCase;
+exports.DeleteProductCategoryController = void 0;
+class DeleteProductCategoryController {
+    constructor(deleteProductCategory) {
+        this.deleteProductCategory = deleteProductCategory;
     }
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { idLogin, category, categorySlug, image } = request.body;
             try {
-                yield this.updateProductCategoryUseCase.execute({
+                const isDeleteCategory = yield this.deleteProductCategory.execute({
                     id,
-                    idLogin,
-                    category,
-                    categorySlug,
-                    image,
                 });
-                return response.status(200).send();
+                if (isDeleteCategory) {
+                    return response.status(204).send();
+                }
+                return response.status(404).send();
             }
             catch (error) {
                 return response.status(400).json({
@@ -36,4 +34,4 @@ class UpdateProductCategoryController {
         });
     }
 }
-exports.UpdateProductCategoryController = UpdateProductCategoryController;
+exports.DeleteProductCategoryController = DeleteProductCategoryController;

@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.listProductCategoryController = exports.listProductCategoryUseCase = void 0;
+const PostgresProductCategoryRepository_1 = require("../../../repositories/implementations/PostgresProductCategoryRepository");
+const ListProductCategoryController_1 = require("./ListProductCategoryController");
+const ListProductCategoryUseCase_1 = require("./ListProductCategoryUseCase");
+const postgresProductCategoryRepository = new PostgresProductCategoryRepository_1.PostgresProductCategoryRepository();
+const listProductCategoryUseCase = new ListProductCategoryUseCase_1.ListProductCategoryUseCase(postgresProductCategoryRepository);
+exports.listProductCategoryUseCase = listProductCategoryUseCase;
+const listProductCategoryController = new ListProductCategoryController_1.ListProductCategoryController(listProductCategoryUseCase);
+exports.listProductCategoryController = listProductCategoryController;

@@ -18,4 +18,23 @@ export class PostgresProductRepository implements IProductRepository {
   async save(product: Product): Promise<void> {
     await prisma.product.create({ data: product });
   }
+
+  async findById(id: string): Promise<Product | null> {
+    const product = prisma.product.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return product;
+  }
+
+  async update(product: Product): Promise<void> {
+    await prisma.product.update({
+      where: {
+        id: product.id,
+      },
+      data: product,
+    });
+  }
 }

@@ -39,6 +39,36 @@ class PostgresProductCategoryRepository {
             return true;
         });
     }
+    findAllCategory(idLogin) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const categories = yield prisma.categoryProduct.findMany({
+                where: {
+                    idLogin,
+                },
+            });
+            return categories;
+        });
+    }
+    findByIdLogin(idLogin) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const category = yield prisma.categoryProduct.findFirst({
+                where: {
+                    idLogin,
+                },
+            });
+            return category;
+        });
+    }
+    findCategory(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const category = yield prisma.categoryProduct.findFirst({
+                where: {
+                    id,
+                },
+            });
+            return category;
+        });
+    }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const category = yield prisma.categoryProduct.findUnique({
@@ -68,6 +98,15 @@ class PostgresProductCategoryRepository {
     save(category) {
         return __awaiter(this, void 0, void 0, function* () {
             yield prisma.categoryProduct.create({ data: category });
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield prisma.categoryProduct.delete({
+                where: {
+                    id,
+                },
+            });
         });
     }
 }

@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createProductController = exports.createProductUseCase = void 0;
+const PostgresProductRepository_1 = require("../../../repositories/implementations/PostgresProductRepository");
+const CreateProductController_1 = require("./CreateProductController");
+const CreateProductUseCase_1 = require("./CreateProductUseCase");
+const postgresProductRepository = new PostgresProductRepository_1.PostgresProductRepository();
+const createProductUseCase = new CreateProductUseCase_1.CreateProductUseCase(postgresProductRepository);
+exports.createProductUseCase = createProductUseCase;
+const createProductController = new CreateProductController_1.CreateProductController(createProductUseCase);
+exports.createProductController = createProductController;

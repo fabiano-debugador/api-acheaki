@@ -20,7 +20,7 @@ export class UpdateProductCategoryController {
         categorySlug,
         image,
       });
-      return response.status(204).send();
+      return response.status(200).send();
     } catch (error: any) {
       return response.status(400).json({
         message: error.message || "Unexpected error",
