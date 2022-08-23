@@ -11,6 +11,8 @@ import { updateProductCategoryController } from "./useCase/ProductCategory/Updat
 import { deleteProductCategoryController } from "./useCase/ProductCategory/DeleteProductCategory";
 import { listProductCategoryController } from "./useCase/ProductCategory/ListProductCategory";
 
+import { createProductController } from "./useCase/Product/CreateProduct";
+
 const route = Router();
 
 route.post("/clients", (req, resp) => {
@@ -55,6 +57,11 @@ route.get("/product/category", (req, res) => {
 
 route.get("/product/category/:id", (req, res) => {
   return listProductCategoryController.getOne(req, res);
+});
+
+// Products
+route.post("/product", (req, res) => {
+  return createProductController.handle(req, res);
 });
 
 export { route };
