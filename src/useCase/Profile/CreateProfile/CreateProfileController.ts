@@ -2,19 +2,9 @@ import { Request, Response } from "express";
 import { CreateProfileUseCase } from "./CreateProfileUseCase";
 
 export class CreateProfileController {
-  constructor (
-    private createProfileUseCase: CreateProfileUseCase
-  ) {}
+  constructor(private createProfileUseCase: CreateProfileUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    // let obj = {name:'', age: ''};
-    function empetyObject(obj: any) {
-      for (var prop in obj) {
-        if (obj[prop] === '') return false;
-      }
-      return true;
-    }
-
     const {
       idLogin,
       name,
@@ -26,47 +16,30 @@ export class CreateProfileController {
       tag,
       follower,
       point,
-      vote
+      vote,
     } = request.body;
 
+    const data = {
+      idLogin,
+      name,
+      slogan,
+      description,
+      titleSlug,
+      imageProfile,
+      banner,
+      tag,
+      follower,
+      point,
+      vote,
+    };
+
     try {
-      if (empetyObject({
-        idLogin,
-        name,
-        slogan,
-        description,
-        titleSlug,
-        imageProfile,
-        banner,
-        tag,
-        follower,
-        point,
-        vote
-      })) {
-        await this.createProfileUseCase.execute({
-          idLogin,
-          name,
-          slogan,
-          description,
-          titleSlug,
-          imageProfile,
-          banner,
-          tag,
-          follower,
-          point,
-          vote
-        })
-
-        return response.status(201).send();
-
-      }
+      await this.createProfileUseCase.execute(data);
+      return response.status(201).send();
+    } catch (error: any) {
       return response.status(400).json({
-        message: 'Some field is empty.'
-      })
-    } catch (error) {
-      return response.status(400).json({
-        message: error || 'Unexpedted error.'
-      })
+        message: error.message || "Unexpedted error.",
+      });
     }
   }
 }

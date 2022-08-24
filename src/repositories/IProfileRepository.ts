@@ -1,6 +1,9 @@
 import { Profile } from "../entities/Profile";
 
-export interface IProfileSaveRepository {
+export interface IProfileRepository {
   findByIdLogin(idLogin: string): Promise<Profile | null>;
+}
+
+export interface IProfileSaveRepository extends IProfileRepository {
   save(profile: Profile): Promise<void>;
 }
