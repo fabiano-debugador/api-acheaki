@@ -1,4 +1,4 @@
-import { IProductRepository } from "../IProductRepositories";
+import { IProductRepository } from "../IProductRepository";
 import { PrismaClient } from "@prisma/client";
 import { Product } from "../../entities/Product";
 

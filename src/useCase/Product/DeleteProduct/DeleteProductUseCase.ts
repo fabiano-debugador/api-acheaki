@@ -1,4 +1,4 @@
-import { IDeleteProductRepository } from "../../../repositories/IProductRepositories";
+import { IDeleteProductRepository } from "../../../repositories/IProductRepository";
 import { IDeleteProductDTO } from "./DeleteProductDTO";
 
 export class DeleteProductUseCase {

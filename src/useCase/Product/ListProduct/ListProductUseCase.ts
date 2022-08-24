@@ -1,5 +1,5 @@
 import { Product } from "../../../entities/Product";
-import { IProductRepository } from "../../../repositories/IProductRepositories";
+import { IProductRepository } from "../../../repositories/IProductRepository";
 import { IListAllProductDTO } from "./ListAllProductDTO";
 import { IListOneProductDTO } from "./ListOneProductDTO";
 

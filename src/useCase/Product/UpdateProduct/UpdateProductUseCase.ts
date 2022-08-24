@@ -1,4 +1,4 @@
-import { IUpdateProductRepository } from "../../../repositories/IProductRepositories";
+import { IUpdateProductRepository } from "../../../repositories/IProductRepository";
 import { IUpdateProductDTO } from "./UpdateProductDTO";
 
 export class UpdateProductUseCase {
