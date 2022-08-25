@@ -4,7 +4,9 @@ import { deleteClientController } from "./useCase/Client/DeleteClient";
 import { listClientController } from "./useCase/Client/ListClient";
 import { updateClientController } from "./useCase/Client/UpdateClient";
 
-import { createProfileController } from "./useCase/Profile/CreateProfile";
+// import { createProfileController } from "./useCase/Profile/CreateProfile";
+import { updateProfileController } from "./useCase/Profile/UpdateProfile";
+import { listAllProfileController } from "./useCase/Profile/ListAllProfile";
 
 import { createProductCategoryController } from "./useCase/ProductCategory/CreateProductCategory";
 import { updateProductCategoryController } from "./useCase/ProductCategory/UpdateProductCategory";
@@ -38,8 +40,17 @@ route.delete("/clients/:id", (req, resp) => {
   return deleteClientController.handle(req, resp);
 });
 
-route.post("/profiles", (req, res) => {
-  return createProfileController.handle(req, res);
+// profile
+// route.post("/profiles", (req, res) => {
+//   return createProfileController.handle(req, res);
+// });
+
+route.put("/profiles/:id", (req, res) => {
+  return updateProfileController.handle(req, res);
+});
+
+route.get("/profiles", (req, res) => {
+  return listAllProfileController.listAll(req, res);
 });
 
 route.post("/product/category", (req, res) => {

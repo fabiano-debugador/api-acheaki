@@ -27,15 +27,21 @@ class PostgresClientRepository {
         return __awaiter(this, void 0, void 0, function* () {
             const client = yield prisma.client.findUnique({
                 where: {
-                    id: id
-                }
+                    id: id,
+                },
             });
             return client;
         });
     }
     save(client) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield prisma.client.create({ data: client });
+            const newclient = yield prisma.client.create({ data: client });
+            return newclient;
+        });
+    }
+    createProfile(idLogin) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield prisma.profile.create({ data: { idLogin } });
         });
     }
     findAll() {
@@ -53,8 +59,8 @@ class PostgresClientRepository {
                 },
                 data: {
                     login: login,
-                    password: password
-                }
+                    password: password,
+                },
             });
         });
     }
@@ -62,8 +68,8 @@ class PostgresClientRepository {
         return __awaiter(this, void 0, void 0, function* () {
             yield prisma.client.delete({
                 where: {
-                    id: id
-                }
+                    id: id,
+                },
             });
         });
     }

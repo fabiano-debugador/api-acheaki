@@ -1,21 +1,21 @@
-import { Profile } from "../../../entities/Profile";
-import { IProfileSaveRepository } from "../../../repositories/IProfileRepository";
-import { ICreateProfileRequestDTO } from "../../Profile/CreateProfile/CreateProfile.DTO";
+// import { Profile } from "../../../entities/Profile";
+// import { IProfileSaveRepository } from "../../../repositories/IProfileRepository";
+// import { ICreateProfileRequestDTO } from "../../Profile/CreateProfile/CreateProfile.DTO";
 
-export class CreateProfileUseCase {
-  constructor(private profileRepository: IProfileSaveRepository) {}
+// export class CreateProfileUseCase {
+//   constructor(private profileRepository: IProfileSaveRepository) {}
 
-  async execute(data: ICreateProfileRequestDTO) {
-    const profileAlreadyExists = await this.profileRepository.findByIdLogin(
-      data.idLogin
-    );
+//   async execute(data: ICreateProfileRequestDTO) {
+//     const profileAlreadyExists = await this.profileRepository.findByIdLogin(
+//       data.idLogin
+//     );
 
-    if (profileAlreadyExists) {
-      throw new Error("Profile already exists.");
-    }
+//     if (profileAlreadyExists) {
+//       throw new Error("Profile already exists.");
+//     }
 
-    const profile = new Profile(data);
+//     const profile = new Profile(data);
 
-    await this.profileRepository.save(profile);
-  }
-}
+//     await this.profileRepository.save(profile);
+//   }
+// }

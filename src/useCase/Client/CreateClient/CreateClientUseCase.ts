@@ -3,19 +3,23 @@ import { IClientsRepository } from "../../../repositories/IClientsRepositories";
 import { ICreateClientRequestDTO } from "./CreateClientDTO";
 
 export class CreateClientUseCase {
-  constructor (
-    private clientsRepository: IClientsRepository
-  ) {}
+  constructor(private clientsRepository: IClientsRepository) {}
 
   async execute(data: ICreateClientRequestDTO) {
-    const clientAlreadyExists = await this.clientsRepository.findByLogin(data.login);
+    const clientAlreadyExists = await this.clientsRepository.findByLogin(
+      data.login
+    );
 
     if (clientAlreadyExists) {
-      throw new Error('Client already exists.');
+      throw new Error("Client already exists.");
     }
 
     const client = new Client(data);
 
     await this.clientsRepository.save(client);
+
+    if (client.id) {
+      await this.clientsRepository.createProfile(client.id);
+    }
   }
 }

@@ -23,16 +23,16 @@ model Client {
 model Profile {
   id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   idLogin      String  @unique @db.Uuid
-  name         String
+  name         String?
   slogan       String?
-  description  String
-  titleSlug    String
-  imageProfile String
-  banner       String
-  tag          String
-  follower     Int
-  point        Decimal
-  vote         Int
+  description  String?
+  titleSlug    String?
+  imageProfile String?
+  banner       String?
+  tag          String?
+  follower     Int?
+  point        Int?
+  vote         Int?
   login        Client  @relation(fields: [idLogin], references: [id])
 }
 

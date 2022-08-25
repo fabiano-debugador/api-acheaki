@@ -6,7 +6,9 @@ const CreateClient_1 = require("./useCase/Client/CreateClient");
 const DeleteClient_1 = require("./useCase/Client/DeleteClient");
 const ListClient_1 = require("./useCase/Client/ListClient");
 const UpdateClient_1 = require("./useCase/Client/UpdateClient");
-const CreateProfile_1 = require("./useCase/Profile/CreateProfile");
+// import { createProfileController } from "./useCase/Profile/CreateProfile";
+const UpdateProfile_1 = require("./useCase/Profile/UpdateProfile");
+const ListAllProfile_1 = require("./useCase/Profile/ListAllProfile");
 const CreateProductCategory_1 = require("./useCase/ProductCategory/CreateProductCategory");
 const UpdateProductCategory_1 = require("./useCase/ProductCategory/UpdateProductCategory");
 const DeleteProductCategory_1 = require("./useCase/ProductCategory/DeleteProductCategory");
@@ -32,8 +34,15 @@ route.put("/clients/:id", (req, resp) => {
 route.delete("/clients/:id", (req, resp) => {
     return DeleteClient_1.deleteClientController.handle(req, resp);
 });
-route.post("/profiles", (req, res) => {
-    return CreateProfile_1.createProfileController.handle(req, res);
+// profile
+// route.post("/profiles", (req, res) => {
+//   return createProfileController.handle(req, res);
+// });
+route.put("/profiles/:id", (req, res) => {
+    return UpdateProfile_1.updateProfileController.handle(req, res);
+});
+route.get("/profiles", (req, res) => {
+    return ListAllProfile_1.listAllProfileController.listAll(req, res);
 });
 route.post("/product/category", (req, res) => {
     return CreateProductCategory_1.createProductCategoryController.handle(req, res);

@@ -2,7 +2,8 @@ import { Client } from "../entities/Client";
 
 export interface IClientsRepository {
   findByLogin(login: string): Promise<Client | Client[] | null>;
-  save(client: Client): Promise<void>;
+  save(client: Client): Promise<Client>;
+  createProfile(idLogin: string): Promise<void>;
 }
 
 export interface IAllClients extends IClientsRepository {

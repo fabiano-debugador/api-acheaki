@@ -5,17 +5,42 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class PostgresProfileRepository implements IProfileRepository {
-  async findByIdLogin(idLogin: string): Promise<Profile | null> {
-    const profile = await prisma.profile.findUnique({
+  // async findByIdLogin(idLogin: string): Promise<Profile | null> {
+  //   const profile = await prisma.profile.findUnique({
+  //     where: {
+  //       idLogin: idLogin,
+  //     },
+  //   });
+
+  //   return profile;
+  // }
+
+  async findById(id: string): Promise<any> {
+    const profile = await prisma.profile.findFirst({
       where: {
-        idLogin: idLogin,
+        id,
       },
     });
 
     return profile;
   }
 
-  async save(profile: Profile): Promise<void> {
-    await prisma.profile.create({ data: profile });
+  async listAll(idLogin: string): Promise<any> {
+    const product = await prisma.product.findMany({
+      where: {
+        idLogin,
+      },
+    });
+
+    return product;
+  }
+
+  async update(profile: Profile): Promise<void> {
+    await prisma.profile.update({
+      where: {
+        id: profile.id,
+      },
+      data: profile,
+    });
   }
 }

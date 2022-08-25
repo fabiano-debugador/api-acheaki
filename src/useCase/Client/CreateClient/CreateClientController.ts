@@ -1,10 +1,8 @@
-import { Request, Response } from 'express';
-import { CreateClientUseCase } from './CreateClientUseCase';
+import { Request, Response } from "express";
+import { CreateClientUseCase } from "./CreateClientUseCase";
 
 export class CreateClientController {
-  constructor (
-    private createClientUseCase: CreateClientUseCase
-  ){}
+  constructor(private createClientUseCase: CreateClientUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
     const { login, password } = request.body;
@@ -12,14 +10,14 @@ export class CreateClientController {
     try {
       await this.createClientUseCase.execute({
         login,
-        password
-      })
+        password,
+      });
 
       return response.status(201).send();
-    } catch (err) {
+    } catch (err: any) {
       return response.status(400).json({
-        message: err || 'Unexpected error.'
-      })
+        message: err.message || "Unexpected error.",
+      });
     }
   }
 }

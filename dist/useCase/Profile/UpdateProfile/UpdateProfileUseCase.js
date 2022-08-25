@@ -9,27 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateClientController = void 0;
-class CreateClientController {
-    constructor(createClientUseCase) {
-        this.createClientUseCase = createClientUseCase;
+exports.UpdateProfileUseCase = void 0;
+class UpdateProfileUseCase {
+    constructor(profileRepository) {
+        this.profileRepository = profileRepository;
     }
-    handle(request, response) {
+    execute(profile) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { login, password } = request.body;
-            try {
-                yield this.createClientUseCase.execute({
-                    login,
-                    password,
-                });
-                return response.status(201).send();
+            const existsProfile = yield this.profileRepository.findById(profile.id);
+            if (!existsProfile) {
+                throw new Error("Profile not found.");
             }
-            catch (err) {
-                return response.status(400).json({
-                    message: err.message || "Unexpected error.",
-                });
-            }
+            yield this.profileRepository.update(profile);
         });
     }
 }
-exports.CreateClientController = CreateClientController;
+exports.UpdateProfileUseCase = UpdateProfileUseCase;

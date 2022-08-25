@@ -5,7 +5,6 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class PostgresClientRepository implements IAllClients {
-
   async findByLogin(login: string): Promise<Client | null> {
     const client = await prisma.client.findUnique({
       where: {
@@ -18,21 +17,26 @@ export class PostgresClientRepository implements IAllClients {
   async findById(id: string): Promise<Client | null> {
     const client = await prisma.client.findUnique({
       where: {
-        id: id
-      }
-    })
+        id: id,
+      },
+    });
 
     return client;
   }
 
-  async save(client: Client): Promise<void> {
-    await prisma.client.create({ data: client });
+  async save(client: Client): Promise<Client> {
+    const newclient = await prisma.client.create({ data: client });
+    return newclient;
+  }
+
+  async createProfile(idLogin: string): Promise<void> {
+    await prisma.profile.create({ data: { idLogin } });
   }
 
   async findAll(): Promise<Client[] | null> {
     const clients = await prisma.client.findMany();
 
-    return clients
+    return clients;
   }
 
   async update(data: Client): Promise<void> {
@@ -43,16 +47,16 @@ export class PostgresClientRepository implements IAllClients {
       },
       data: {
         login: login,
-        password: password
-      }
-    })
+        password: password,
+      },
+    });
   }
 
   async delete(id: string): Promise<void> {
     await prisma.client.delete({
       where: {
-        id: id
-      }
-    })
+        id: id,
+      },
+    });
   }
 }

@@ -2,14 +2,10 @@ import { PostgresClientRepository } from "../../../repositories/implementations/
 import { CreateClientController } from "./CreateClientController";
 import { CreateClientUseCase } from "./CreateClientUseCase";
 
-const postgresClientRepository = new PostgresClientRepository;
+const postgresClientRepository = new PostgresClientRepository();
 
-const createClientUseCase = new CreateClientUseCase(
-  postgresClientRepository
-)
+const createClientUseCase = new CreateClientUseCase(postgresClientRepository);
 
-const createClientController = new CreateClientController(
-  createClientUseCase
-)
+const createClientController = new CreateClientController(createClientUseCase);
 
-export { createClientUseCase, createClientController }
+export { createClientUseCase, createClientController };

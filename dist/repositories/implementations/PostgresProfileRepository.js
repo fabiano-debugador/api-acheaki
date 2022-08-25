@@ -13,19 +13,42 @@ exports.PostgresProfileRepository = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 class PostgresProfileRepository {
-    findByIdLogin(idLogin) {
+    // async findByIdLogin(idLogin: string): Promise<Profile | null> {
+    //   const profile = await prisma.profile.findUnique({
+    //     where: {
+    //       idLogin: idLogin,
+    //     },
+    //   });
+    //   return profile;
+    // }
+    findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const profile = yield prisma.profile.findUnique({
+            const profile = yield prisma.profile.findFirst({
                 where: {
-                    idLogin: idLogin,
+                    id,
                 },
             });
             return profile;
         });
     }
-    save(profile) {
+    listAll(idLogin) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield prisma.profile.create({ data: profile });
+            const product = yield prisma.product.findMany({
+                where: {
+                    idLogin,
+                },
+            });
+            return product;
+        });
+    }
+    update(profile) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield prisma.profile.update({
+                where: {
+                    id: profile.id,
+                },
+                data: profile,
+            });
         });
     }
 }

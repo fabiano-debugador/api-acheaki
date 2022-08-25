@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.listAllProfileController = exports.listAllProfileUseCase = void 0;
+const PostgresProfileRepository_1 = require("../../../repositories/implementations/PostgresProfileRepository");
+const ListAllProfileController_1 = require("./ListAllProfileController");
+const ListAllProfileUseCase_1 = require("./ListAllProfileUseCase");
+const postgresProductRepository = new PostgresProfileRepository_1.PostgresProfileRepository();
+const listAllProfileUseCase = new ListAllProfileUseCase_1.ListAllProfileUseCase(postgresProductRepository);
+exports.listAllProfileUseCase = listAllProfileUseCase;
+const listAllProfileController = new ListAllProfileController_1.ListAllProfileController(listAllProfileUseCase);
+exports.listAllProfileController = listAllProfileController;

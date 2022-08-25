@@ -9,27 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateClientController = void 0;
-class CreateClientController {
-    constructor(createClientUseCase) {
-        this.createClientUseCase = createClientUseCase;
+exports.ListAllProfileController = void 0;
+class ListAllProfileController {
+    constructor(listAllProfiletUseCase) {
+        this.listAllProfiletUseCase = listAllProfiletUseCase;
     }
-    handle(request, response) {
+    listAll(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { login, password } = request.body;
+            const { idLogin } = request.params;
             try {
-                yield this.createClientUseCase.execute({
-                    login,
-                    password,
+                const profiles = yield this.listAllProfiletUseCase.listAll({
+                    idLogin,
                 });
-                return response.status(201).send();
+                if (profiles) {
+                    return response.status(200).send({ profiles });
+                }
+                return response.status(404).send();
             }
-            catch (err) {
+            catch (error) {
                 return response.status(400).json({
-                    message: err.message || "Unexpected error.",
+                    message: error.message || "Unexpected error",
                 });
             }
         });
     }
 }
-exports.CreateClientController = CreateClientController;
+exports.ListAllProfileController = ListAllProfileController;

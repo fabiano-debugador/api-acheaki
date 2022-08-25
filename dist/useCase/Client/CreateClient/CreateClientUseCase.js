@@ -19,10 +19,13 @@ class CreateClientUseCase {
         return __awaiter(this, void 0, void 0, function* () {
             const clientAlreadyExists = yield this.clientsRepository.findByLogin(data.login);
             if (clientAlreadyExists) {
-                throw new Error('Client already exists.');
+                throw new Error("Client already exists.");
             }
             const client = new Client_1.Client(data);
             yield this.clientsRepository.save(client);
+            if (client.id) {
+                yield this.clientsRepository.createProfile(client.id);
+            }
         });
     }
 }
