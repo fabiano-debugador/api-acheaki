@@ -33,7 +33,7 @@ class PostgresProfileRepository {
     }
     listAll(idLogin) {
         return __awaiter(this, void 0, void 0, function* () {
-            const product = yield prisma.product.findMany({
+            const product = yield prisma.profile.findMany({
                 where: {
                     idLogin,
                 },

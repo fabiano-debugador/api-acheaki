@@ -17,6 +17,7 @@ const CreateProduct_1 = require("./useCase/Product/CreateProduct");
 const UpdateProduct_1 = require("./useCase/Product/UpdateProduct");
 const DeleteProduct_1 = require("./useCase/Product/DeleteProduct");
 const ListProduct_1 = require("./useCase/Product/ListProduct");
+const ListOneProfile_1 = require("./useCase/Profile/ListOneProfile");
 const route = (0, express_1.Router)();
 exports.route = route;
 route.post("/clients", (req, resp) => {
@@ -43,6 +44,9 @@ route.put("/profiles/:id", (req, res) => {
 });
 route.get("/profiles", (req, res) => {
     return ListAllProfile_1.listAllProfileController.listAll(req, res);
+});
+route.get("/profiles/:id", (req, res) => {
+    return ListOneProfile_1.listOneProfileController.getOne(req, res);
 });
 route.post("/product/category", (req, res) => {
     return CreateProductCategory_1.createProductCategoryController.handle(req, res);

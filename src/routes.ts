@@ -17,6 +17,7 @@ import { createProductController } from "./useCase/Product/CreateProduct";
 import { updateProductController } from "./useCase/Product/UpdateProduct";
 import { deleteProductController } from "./useCase/Product/DeleteProduct";
 import { listProductController } from "./useCase/Product/ListProduct";
+import { listOneProfileController } from "./useCase/Profile/ListOneProfile";
 
 const route = Router();
 
@@ -51,6 +52,10 @@ route.put("/profiles/:id", (req, res) => {
 
 route.get("/profiles", (req, res) => {
   return listAllProfileController.listAll(req, res);
+});
+
+route.get("/profiles/:id", (req, res) => {
+  return listOneProfileController.getOne(req, res);
 });
 
 route.post("/product/category", (req, res) => {
