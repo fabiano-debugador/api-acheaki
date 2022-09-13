@@ -11,6 +11,12 @@ export class UpdateProfileUseCase {
       throw new Error("Profile not found.");
     }
 
-    await this.profileRepository.update(profile);
+    const profileData = {
+      ...profile,
+      banner: profile.banner.banner[0].path,
+      imageProfile: profile.imageProfile.banner[0].path,
+    };
+
+    await this.profileRepository.update(profileData);
   }
 }

@@ -13,13 +13,17 @@ export class UpdateProductController {
       slug,
       price,
       description,
-      image,
       page,
       tag,
       vote,
       like,
       point,
     } = request.body;
+
+    let filename = "";
+    if (request.file) {
+      filename = request.file.path;
+    }
 
     try {
       await this.updateProductUseCase.execute({
@@ -30,7 +34,7 @@ export class UpdateProductController {
         slug,
         price,
         description,
-        image,
+        image: filename,
         page,
         tag,
         vote,

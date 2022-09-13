@@ -1,6 +1,5 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import { UpdateProductCategoryUseCase } from "./UpdateProductCategoryUseCase";
-import { ProductCategory } from "../../../entities/ProductCategory";
 
 export class UpdateProductCategoryController {
   constructor(
@@ -9,18 +8,18 @@ export class UpdateProductCategoryController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { idLogin, category, categorySlug, image }: ProductCategory =
-      request.body;
-
+    const { idLogin, category, categorySlug } = request.body;
+    let filename = null;
+    if (request.file) filename = request.file.path;
     try {
-      await this.updateProductCategoryUseCase.execute({
+      const updatedData = await this.updateProductCategoryUseCase.execute({
         id,
         idLogin,
         category,
         categorySlug,
-        image,
+        image: filename,
       });
-      return response.status(200).send();
+      return response.status(200).send(updatedData);
     } catch (error: any) {
       return response.status(400).json({
         message: error.message || "Unexpected error",

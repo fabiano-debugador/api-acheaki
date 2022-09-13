@@ -11,13 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgresClientRepository = void 0;
 const client_1 = require("@prisma/client");
+const bcrypt_1 = require("bcrypt");
 const prisma = new client_1.PrismaClient();
 class PostgresClientRepository {
     findByLogin(login) {
         return __awaiter(this, void 0, void 0, function* () {
-            const client = yield prisma.client.findUnique({
+            const client = yield prisma.client.findFirst({
                 where: {
-                    login: String(login),
+                    login,
                 },
             });
             return client;
@@ -35,7 +36,14 @@ class PostgresClientRepository {
     }
     save(client) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newclient = yield prisma.client.create({ data: client });
+            const passwordHash = yield (0, bcrypt_1.hash)(client.password, 8);
+            const newclient = yield prisma.client.create({
+                data: {
+                    login: client.login,
+                    password: passwordHash,
+                },
+            });
+            yield prisma.profile.create({ data: { idLogin: newclient.id } });
             return newclient;
         });
     }
@@ -53,13 +61,14 @@ class PostgresClientRepository {
     update(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id, login, password } = data;
+            const passwordHash = yield (0, bcrypt_1.hash)(password, 8);
             yield prisma.client.update({
                 where: {
-                    id: id,
+                    id,
                 },
                 data: {
-                    login: login,
-                    password: password,
+                    login,
+                    password: passwordHash,
                 },
             });
         });

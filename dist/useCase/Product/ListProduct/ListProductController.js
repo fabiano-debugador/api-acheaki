@@ -16,7 +16,7 @@ class ListProductController {
     }
     listAll(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idLogin } = request.body;
+            const { idLogin } = request.params;
             try {
                 const product = yield this.listProductUseCase.listAll({
                     idLogin,

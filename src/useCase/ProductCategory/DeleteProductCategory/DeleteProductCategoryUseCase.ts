@@ -1,8 +1,8 @@
-import { IProductCategoryRepository } from "../../../repositories/IProductCategoryRepository";
+import { IDeleteProductCategory } from "../../../repositories/IProductCategoryRepository";
 import { IDeleteProductCategoryDTO } from "./DeleteProductCategoryDTO";
 
 export class DeleteProductCategoryUseCase {
-  constructor(private productCategoryRepository: IProductCategoryRepository) {}
+  constructor(private productCategoryRepository: IDeleteProductCategory) {}
 
   async execute(data: IDeleteProductCategoryDTO): Promise<boolean> {
     const existProductCategory = await this.productCategoryRepository.findById(

@@ -4,10 +4,10 @@ export interface IUpdateProfileDTO {
   slogan: string;
   description: string;
   titleSlug: string;
-  imageProfile: string;
-  banner: string;
+  imageProfile?: any;
+  banner?: any;
   tag: string;
-  follower: number;
-  point: any;
-  vote: number;
+  follower: number | number;
+  point: number | number;
+  vote: number | number;
 }

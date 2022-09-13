@@ -1,9 +1,9 @@
 import { ProductCategory } from "../../../entities/ProductCategory";
-import { IProductCategoryRepository } from "../../../repositories/IProductCategoryRepository";
+import { ISaveProductCategory } from "../../../repositories/IProductCategoryRepository";
 import { ICreateProductCategoryRequestDTO } from "./CreateProductCategoryDTO";
 
 export class CreateProductCategoryUseCase {
-  constructor(private productCategoryRepository: IProductCategoryRepository) {}
+  constructor(private productCategoryRepository: ISaveProductCategory) {}
 
   async execute(data: ICreateProductCategoryRequestDTO) {
     const categoryAlreadyExists =

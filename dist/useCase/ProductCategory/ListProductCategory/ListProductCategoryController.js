@@ -16,10 +16,10 @@ class ListProductCategoryController {
     }
     listAll(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idLogin } = request.body;
+            const { id } = request.params;
             try {
                 const category = yield this.listproductCategory.listAll({
-                    idLogin,
+                    idLogin: id,
                 });
                 if (category) {
                     return response.status(200).send({ category });

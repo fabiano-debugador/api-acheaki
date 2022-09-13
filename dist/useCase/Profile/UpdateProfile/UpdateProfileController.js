@@ -17,7 +17,7 @@ class UpdateProfileController {
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { name, slogan, description, titleSlug, imageProfile, banner, tag, follower, point, vote, } = request.body;
+            const { name, slogan, description, titleSlug, tag, follower, point, vote } = request.body;
             try {
                 yield this.updateProfileUseCase.execute({
                     id,
@@ -25,12 +25,12 @@ class UpdateProfileController {
                     slogan,
                     description,
                     titleSlug,
-                    imageProfile,
-                    banner,
+                    imageProfile: request.files,
+                    banner: request.files,
                     tag,
-                    follower,
-                    point,
-                    vote,
+                    follower: parseInt(follower),
+                    point: parseInt(point),
+                    vote: parseInt(vote),
                 });
                 return response.status(200).send();
             }

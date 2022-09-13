@@ -20,7 +20,8 @@ class UpdateProfileUseCase {
             if (!existsProfile) {
                 throw new Error("Profile not found.");
             }
-            yield this.profileRepository.update(profile);
+            const profileData = Object.assign(Object.assign({}, profile), { banner: profile.banner.banner[0].path, imageProfile: profile.imageProfile.banner[0].path });
+            yield this.profileRepository.update(profileData);
         });
     }
 }

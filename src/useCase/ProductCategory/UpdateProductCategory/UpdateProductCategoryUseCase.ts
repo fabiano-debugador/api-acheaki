@@ -1,8 +1,8 @@
-import { IProductCategoryRepository } from "../../../repositories/IProductCategoryRepository";
+import { IUpdateProductCategory } from "../../../repositories/IProductCategoryRepository";
 import { IUpdateProductCategoryRequestDTO } from "./UpdateProductCategoryDTO";
 
 export class UpdateProductCategoryUseCase {
-  constructor(private productCategoryRepository: IProductCategoryRepository) {}
+  constructor(private productCategoryRepository: IUpdateProductCategory) {}
 
   async execute(data: IUpdateProductCategoryRequestDTO) {
     const verifiedCategory =
@@ -19,10 +19,12 @@ export class UpdateProductCategoryUseCase {
       throw new Error("Category not found in this account");
     }
 
-    if (categoryExists) {
-      throw new Error("Category already exists");
-    }
+    // if (categoryExists) {
+    //   throw new Error("Category already exists");
+    // }
 
-    await this.productCategoryRepository.update(data);
+    const updatedData = await this.productCategoryRepository.update(data);
+
+    return updatedData;
   }
 }

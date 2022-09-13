@@ -82,7 +82,7 @@ class PostgresProductCategoryRepository {
     update(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id, idLogin, category, categorySlug, image } = data;
-            yield prisma.categoryProduct.update({
+            const updatedData = yield prisma.categoryProduct.update({
                 where: {
                     id,
                 },
@@ -93,6 +93,7 @@ class PostgresProductCategoryRepository {
                     image,
                 },
             });
+            return updatedData;
         });
     }
     save(category) {

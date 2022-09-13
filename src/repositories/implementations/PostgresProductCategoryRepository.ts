@@ -73,10 +73,10 @@ export class PostgresProductCategoryRepository
     return category;
   }
 
-  async update(data: ProductCategory): Promise<void> {
+  async update(data: ProductCategory): Promise<ProductCategory> {
     const { id, idLogin, category, categorySlug, image } = data;
 
-    await prisma.categoryProduct.update({
+    const updatedData = await prisma.categoryProduct.update({
       where: {
         id,
       },
@@ -87,6 +87,8 @@ export class PostgresProductCategoryRepository
         image,
       },
     });
+
+    return updatedData;
   }
 
   async save(category: ProductCategory): Promise<void> {

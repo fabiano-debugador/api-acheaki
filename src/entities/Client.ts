@@ -1,15 +1,9 @@
-import { uuid } from "uuidv4";
-
 export class Client {
   public readonly id?: string;
-  public login?: string | null;
-  public password?: string | null ;
+  public login!: string;
+  public password!: string;
 
-  constructor (props: Omit<Client, 'id'>, id?:string) {
+  constructor(props: Omit<Client, "id">) {
     Object.assign(this, props);
-
-    if (!id) {
-      this.id = uuid()
-    }
   }
 }

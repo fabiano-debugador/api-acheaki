@@ -1,25 +1,19 @@
-import { uuid } from "uuidv4";
-
 export class Product {
   public readonly id?: string;
   public idLogin!: string;
   public idCategory!: string;
-  public name!: string;
-  public slug!: string;
-  public price!: number;
-  public description!: string;
-  public image!: string;
+  public name!: string | null;
+  public slug!: string | null;
+  public price!: number | null;
+  public description!: string | null;
+  public image!: string | null;
   public page!: string;
-  public tag!: string;
+  public tag!: string | null;
   public vote!: number;
   public like!: number;
   public point!: number;
 
-  constructor(props: Omit<Product, "id">, id?: string) {
+  constructor(props: Omit<Product, "id">) {
     Object.assign(this, props);
-
-    if (!id) {
-      this.id = uuid();
-    }
   }
 }

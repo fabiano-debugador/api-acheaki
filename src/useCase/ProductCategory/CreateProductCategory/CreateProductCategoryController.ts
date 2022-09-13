@@ -7,15 +7,17 @@ export class CreateProductCategoryController {
   ) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { idLogin, category, categorySlug, image }: ProductCategory =
-      request.body;
-
+    const { idLogin, category, categorySlug } = request.body;
+    let filename = null;
+    if (request.file) {
+      filename = request.file.path;
+    }
     try {
       await this.createProductCategoryUseCase.execute({
         idLogin,
         category,
         categorySlug,
-        image,
+        image: filename,
       });
 
       return response.status(201).send();

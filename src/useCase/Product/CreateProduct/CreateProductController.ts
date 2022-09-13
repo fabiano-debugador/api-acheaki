@@ -19,20 +19,24 @@ export class CreateProductController {
       point,
     } = request.body;
 
+    let filename = "";
+    if (request.file) {
+      filename = request.file.path;
+    }
     try {
       await this.createProductUseCase.execute({
         idLogin,
         idCategory,
         name,
         slug,
-        price,
+        price: parseInt(price),
         description,
-        image,
+        image: filename,
         page,
         tag,
-        vote,
-        like,
-        point,
+        vote: parseInt(vote),
+        like: parseInt(like),
+        point: parseInt(point),
       });
 
       return response.status(201).send();

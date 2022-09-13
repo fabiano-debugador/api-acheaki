@@ -5,7 +5,7 @@ export class ListProductController {
   constructor(private listProductUseCase: ListProductUseCase) {}
 
   async listAll(request: Request, response: Response): Promise<Response> {
-    const { idLogin } = request.body;
+    const { idLogin } = request.params;
 
     try {
       const product = await this.listProductUseCase.listAll({

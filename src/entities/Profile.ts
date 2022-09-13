@@ -1,23 +1,17 @@
-import { uuid } from "uuidv4";
-
 export class Profile {
   public readonly id?: string;
-  public name!: string;
-  public slogan!: string;
-  public description!: string;
-  public titleSlug!: string;
-  public imageProfile!: string;
-  public banner!: string;
-  public tag!: string;
-  public follower!: number;
-  public point!: any;
-  public vote!: number;
+  public name!: string | null;
+  public slogan!: string | null;
+  public description!: string | null;
+  public titleSlug!: string | null;
+  public imageProfile?: string | null;
+  public banner?: string | null;
+  public tag!: string | null;
+  public follower!: number | null;
+  public point!: number | null;
+  public vote!: number | null;
 
-  constructor(props: Omit<Profile, "id, idLogin">, id?: string) {
+  constructor(props: Omit<Profile, "id, idLogin">) {
     Object.assign(this, props);
-
-    if (!id) {
-      this.id = uuid();
-    }
   }
 }

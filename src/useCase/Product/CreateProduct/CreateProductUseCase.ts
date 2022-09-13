@@ -1,9 +1,9 @@
 import { Product } from "../../../entities/Product";
-import { ICreateProductRepository } from "../../../repositories/IProductRepository";
+import { ISaveProductRepository } from "../../../repositories/IProductRepository";
 import { ICreateProductDTO } from "./CreateProductDTO";
 
 export class CreateProductUseCase {
-  constructor(private ProductRepository: ICreateProductRepository) {}
+  constructor(private ProductRepository: ISaveProductRepository) {}
 
   async execute(data: ICreateProductDTO) {
     const productAlreadyExists = await this.ProductRepository.findByName(

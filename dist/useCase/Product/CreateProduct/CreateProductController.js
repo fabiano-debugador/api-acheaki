@@ -17,20 +17,24 @@ class CreateProductController {
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idLogin, idCategory, name, slug, price, description, image, page, tag, vote, like, point, } = request.body;
+            let filename = "";
+            if (request.file) {
+                filename = request.file.path;
+            }
             try {
                 yield this.createProductUseCase.execute({
                     idLogin,
                     idCategory,
                     name,
                     slug,
-                    price,
+                    price: parseInt(price),
                     description,
-                    image,
+                    image: filename,
                     page,
                     tag,
-                    vote,
-                    like,
-                    point,
+                    vote: parseInt(vote),
+                    like: parseInt(like),
+                    point: parseInt(point),
                 });
                 return response.status(201).send();
             }

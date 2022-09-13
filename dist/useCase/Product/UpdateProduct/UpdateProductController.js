@@ -17,7 +17,11 @@ class UpdateProductController {
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { idLogin, idCategory, name, slug, price, description, image, page, tag, vote, like, point, } = request.body;
+            const { idLogin, idCategory, name, slug, price, description, page, tag, vote, like, point, } = request.body;
+            let filename = "";
+            if (request.file) {
+                filename = request.file.path;
+            }
             try {
                 yield this.updateProductUseCase.execute({
                     id,
@@ -27,7 +31,7 @@ class UpdateProductController {
                     slug,
                     price,
                     description,
-                    image,
+                    image: filename,
                     page,
                     tag,
                     vote,

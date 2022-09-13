@@ -21,10 +21,11 @@ class UpdateProductCategoryUseCase {
             if (!verifiedCategory) {
                 throw new Error("Category not found in this account");
             }
-            if (categoryExists) {
-                throw new Error("Category already exists");
-            }
-            yield this.productCategoryRepository.update(data);
+            // if (categoryExists) {
+            //   throw new Error("Category already exists");
+            // }
+            const updatedData = yield this.productCategoryRepository.update(data);
+            return updatedData;
         });
     }
 }

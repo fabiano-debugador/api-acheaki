@@ -5,11 +5,11 @@ export class ListProductCategoryController {
   constructor(private listproductCategory: ListProductCategoryUseCase) {}
 
   async listAll(request: Request, response: Response): Promise<Response> {
-    const { idLogin } = request.body;
+    const { id } = request.params;
 
     try {
       const category = await this.listproductCategory.listAll({
-        idLogin,
+        idLogin: id,
       });
 
       if (category) {

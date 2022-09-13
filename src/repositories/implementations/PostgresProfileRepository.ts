@@ -15,7 +15,7 @@ export class PostgresProfileRepository implements IProfileRepository {
   //   return profile;
   // }
 
-  async findById(id: string): Promise<any> {
+  async findById(id: string): Promise<Profile | null> {
     const profile = await prisma.profile.findFirst({
       where: {
         id,
@@ -25,7 +25,7 @@ export class PostgresProfileRepository implements IProfileRepository {
     return profile;
   }
 
-  async listAll(idLogin: string): Promise<any> {
+  async listAll(idLogin: string): Promise<Profile[]> {
     const product = await prisma.profile.findMany({
       where: {
         idLogin,

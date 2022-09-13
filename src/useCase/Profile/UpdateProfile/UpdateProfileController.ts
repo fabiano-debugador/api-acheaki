@@ -6,18 +6,8 @@ export class UpdateProfileController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const {
-      name,
-      slogan,
-      description,
-      titleSlug,
-      imageProfile,
-      banner,
-      tag,
-      follower,
-      point,
-      vote,
-    } = request.body;
+    const { name, slogan, description, titleSlug, tag, follower, point, vote } =
+      request.body;
 
     try {
       await this.updateProfileUseCase.execute({
@@ -26,12 +16,12 @@ export class UpdateProfileController {
         slogan,
         description,
         titleSlug,
-        imageProfile,
-        banner,
+        imageProfile: request.files,
+        banner: request.files,
         tag,
-        follower,
-        point,
-        vote,
+        follower: parseInt(follower),
+        point: parseInt(point),
+        vote: parseInt(vote),
       });
 
       return response.status(200).send();

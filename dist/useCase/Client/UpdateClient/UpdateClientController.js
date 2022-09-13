@@ -22,13 +22,13 @@ class UpdateClientController {
                 yield this.updateClientUseCase.execute({
                     id,
                     login,
-                    password
+                    password,
                 });
                 return response.status(204).send();
             }
             catch (error) {
                 return response.status(400).json({
-                    message: error || 'Unexpected error.'
+                    message: error.message || "Unexpected error.",
                 });
             }
         });

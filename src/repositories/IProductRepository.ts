@@ -6,7 +6,7 @@ export interface IProductRepository {
   listAll(idLogin: string): Promise<Product[]>;
 }
 
-export interface ICreateProductRepository extends IProductRepository {
+export interface ISaveProductRepository extends IProductRepository {
   save(product: Product): Promise<void>;
 }
 

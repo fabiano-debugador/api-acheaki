@@ -3,5 +3,5 @@ export interface IUpdateProductCategoryRequestDTO {
   idLogin: string;
   category: string;
   categorySlug: string;
-  image: string;
+  image?: string | null;
 }

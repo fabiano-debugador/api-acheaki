@@ -17,16 +17,19 @@ class UpdateProductCategoryController {
     handle(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
-            const { idLogin, category, categorySlug, image } = request.body;
+            const { idLogin, category, categorySlug } = request.body;
+            let filename = null;
+            if (request.file)
+                filename = request.file.path;
             try {
-                yield this.updateProductCategoryUseCase.execute({
+                const updatedData = yield this.updateProductCategoryUseCase.execute({
                     id,
                     idLogin,
                     category,
                     categorySlug,
-                    image,
+                    image: filename,
                 });
-                return response.status(200).send();
+                return response.status(200).send(updatedData);
             }
             catch (error) {
                 return response.status(400).json({
